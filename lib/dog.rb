@@ -44,8 +44,8 @@ class Dog
     dog
   end
 
-  def self.new_from_db(row)
-    self.new(id: row[0], name: row[1], breed: row[2])
+  def self.new_from_db(record)
+    self.new(id: record[0], name: record[1], breed: record[2])
   end
 
   def self.find_by_id(id)
@@ -56,7 +56,7 @@ class Dog
       LIMIT 1
     SQL
     DB[:conn].execute(sql,id).map do |row|
-      self.new_from_db(row)
+      self.new_from_db(record)
     end.first
   end
 
@@ -69,7 +69,7 @@ class Dog
     SQL
 
     DB[:conn].execute(sql,name).map do |row|
-      self.new_from_db(row)
+      self.new_from_db(record)
     end.first
   end
 
